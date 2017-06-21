@@ -14,4 +14,12 @@ public class UIUtils {
 
         return View.inflate(MyApplication.getContext(),id,null);
     }
+
+    public static String getVersionFromat(String key,String value){
+        //Log.e("TAG","key==" + key);
+        //格式化
+        String version = String.format(key, value);
+
+        return version;
+    }
 }

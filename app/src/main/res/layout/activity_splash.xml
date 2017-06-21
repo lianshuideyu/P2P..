@@ -32,19 +32,14 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="当前版本:"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
-
-        <TextView
             android:id="@+id/splash_tv_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0.0"
+            android:text="@string/verson_name"
             android:textColor="@android:color/white"
             android:textSize="15sp" />
+        <!--%1$s ,1代表第一个占位符，s代表string-->
+
     </LinearLayout>
 </RelativeLayout>
 

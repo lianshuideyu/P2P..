@@ -12,12 +12,14 @@ import android.widget.TextView;
 
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.common.AppManager;
+import com.atguigu.p2p.utils.UIUtils;
 
 public class SplashActivity extends AppCompatActivity {
 
     private TextView splash_tv_version;
 
     private RelativeLayout activity_splash;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
         //添加到Activity的管理栈
         AppManager.getInstance().addActivity(this);
 
-        activity_splash = (RelativeLayout)findViewById(R.id.activity_splash);
+        activity_splash = (RelativeLayout) findViewById(R.id.activity_splash);
         splash_tv_version = (TextView) findViewById(R.id.splash_tv_version);
 
         initView();
@@ -38,9 +40,12 @@ public class SplashActivity extends AppCompatActivity {
 
     private void initView() {
 
-        splash_tv_version.setText(getVersion());
         //设置版本号
-
+        splash_tv_version.setText(
+                UIUtils.getVersionFromat(
+                        splash_tv_version.getText().toString(), getVersion()
+                                        )
+                                );
 
     }
 
@@ -80,10 +85,10 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 //动画播放结束进入主主页面
-                if(isLogin()) {
+                if (isLogin()) {
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
-                }else{
+                } else {
                     //进入注册页面
                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(intent);
@@ -109,10 +114,11 @@ public class SplashActivity extends AppCompatActivity {
 
     /**
      * 判断是否为第一次登录
+     *
      * @return
      */
-    private boolean isLogin(){
-        
+    private boolean isLogin() {
+
         return true;
     }
 
