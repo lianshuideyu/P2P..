@@ -46,10 +46,7 @@ public class AppManager {
 //                }
 
             }
-
         }
-
-
     }
 
     /**

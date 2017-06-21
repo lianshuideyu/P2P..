@@ -58,12 +58,14 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void initView() {
         super.initView();
+
     }
 
 
     @Override
     protected void initTitle() {
         baseTitle.setText("首页");
+
     }
 
     /**

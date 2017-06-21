@@ -39,8 +39,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         * 第一 提醒用户
         * 第二 收集异常
         * 第三 退出应用
-        *
-        *
         * */
 
         //方法二利用线程池
@@ -66,6 +64,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         collection(e);
         //关闭所有activity
         AppManager.getInstance().removeAllActivity();
+
+        //为了提前显示吐司
+        //SystemClock.sleep(500);
 
         //杀死当前的进程
         android.os.Process.killProcess(android.os.Process.myPid());

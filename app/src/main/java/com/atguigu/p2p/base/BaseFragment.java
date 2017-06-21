@@ -30,6 +30,7 @@ public abstract class BaseFragment extends Fragment {
             textView.setText("布局文件不能为空");
             return textView;
         }
+
         View view = View.inflate(getActivity(),setLayoutId(),null);
 
         ButterKnife.inject(this,view);
