@@ -9,10 +9,12 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 public class HttpUtils {
 
-    private final AsyncHttpClient client;
+    private AsyncHttpClient httpClient;
+
+    private MyHttpClickListener httpListener;
 
     private HttpUtils() {
-       client = new AsyncHttpClient();
+       httpClient = new AsyncHttpClient();
     }
 
     private static HttpUtils httpUtils = new HttpUtils();
@@ -25,37 +27,37 @@ public class HttpUtils {
         封装第三方联网框架
         * get联网请求
         * */
-    public void get(String url, final MyHttpClickListener httpListener){
+    public void get(String url,MyHttpClickListener httpListener){
 
-
-
-        client.get(url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, String content) {
-                super.onSuccess(statusCode, content);
-                //Log.e("TAG", "HomeFragment联网成功==" + content);
-
-                if(httpListener != null) {
-                    httpListener.onSuccess(content);
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Throwable error, String content) {
-                super.onFailure(error, content);
-
-                //Log.e("TAG", "HomeFragment联网失败==" + content);
-                if(httpListener != null) {
-                    httpListener.onFailure(content);
-
-                }
-            }
-        });
+        this.httpListener = httpListener;
+        httpClient.get(url, handler);
 
     }
 
+    AsyncHttpResponseHandler handler = new AsyncHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, String content) {
+            super.onSuccess(statusCode, content);
+            //Log.e("TAG", "HomeFragment联网成功==" + content);
+
+            if(httpListener != null) {
+                httpListener.onSuccess(content);
+
+            }
+
+        }
+
+        @Override
+        public void onFailure(Throwable error, String content) {
+            super.onFailure(error, content);
+
+            //Log.e("TAG", "HomeFragment联网失败==" + content);
+            if(httpListener != null) {
+                httpListener.onFailure(content);
+
+            }
+        }
+    };
     /**
      * 利用接口将联网数据回传回去
      */
@@ -67,4 +69,28 @@ public class HttpUtils {
 
     }
 
+
+    /*
+       封装第三方联网框架
+       * post联网请求
+       * */
+//    public void post(String url, Map<String,String> map, MyHttpClickListener httpListener){
+//
+//        RequestParams requestParams = new RequestParams();
+//
+//
+//        httpClient.post(url,requestParams,new AsyncHttpResponseHandler(){
+//            @Override
+//            public void onSuccess(int statusCode, String content) {
+//                super.onSuccess(statusCode, content);
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable error, String content) {
+//                super.onFailure(error, content);
+//            }
+//        });
+//
+//
+//    }
 }

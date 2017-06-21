@@ -1,23 +1,17 @@
 package com.atguigu.p2p.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.p2p.R;
+import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.bean.IndexBean;
 import com.atguigu.p2p.common.AppNetConfig;
 import com.atguigu.p2p.utils.HttpUtils;
-import com.atguigu.p2p.utils.UIUtils;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -29,14 +23,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
  * Created by Administrator on 2017/6/20.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
 
     @InjectView(R.id.base_back)
     ImageView baseBack;
@@ -47,45 +40,41 @@ public class HomeFragment extends Fragment {
     TextView baseTitle;
     @InjectView(R.id.banner)
     Banner banner;
+    @InjectView(R.id.tv_home_product)
+    TextView tvHomeProduct;
+    @InjectView(R.id.tv_home_yearrate)
+    TextView tvHomeYearrate;
 
     private IndexBean indexBean;
 
     //ImageView baseBack;
 
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = UIUtils.findViewById(R.layout.fragment_home);
-
-        ButterKnife.inject(this, view);
-
-        return view;
-    }
-
-    private void initView() {
+    public int setLayoutId() {
+        return R.layout.fragment_home;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void initView() {
+        super.initView();
+    }
 
-        initData();
+
+    @Override
+    protected void initTitle() {
+        baseTitle.setText("首页");
     }
 
     /**
      * 添加数据
      */
-    private void initData() {
-        //联网请求数据
+    @Override
+    protected void initData() {
+
         getDataFromNet();
-
-
     }
+
 
     /**
      * 联网请求数据
@@ -127,6 +116,7 @@ public class HomeFragment extends Fragment {
 
     /**
      * 手动解析
+     *
      * @param json
      */
     private void processData2(String json) {
@@ -140,7 +130,7 @@ public class HomeFragment extends Fragment {
             //新建集合准备放数据
             List<IndexBean.ImageArrBean> imageArrList = new ArrayList<>();
 
-            for(int i = 0; i < imageArr.length(); i++) {
+            for (int i = 0; i < imageArr.length(); i++) {
                 IndexBean.ImageArrBean imageArrBean = new IndexBean.ImageArrBean();
 
                 JSONObject imageArrJSONObject = imageArr.getJSONObject(i);
@@ -205,27 +195,25 @@ public class HomeFragment extends Fragment {
 
     private void initBanner() {
         List<IndexBean.ImageArrBean> imageArr = indexBean.getImageArr();
-        //Log.e("TAG","imaurl==" + imageArr.size());
-        banner.setImageLoader(new GlideImageLoader());
-        //设置图片集合
-        images = new ArrayList<>();
 
-        for (int i = 0; i < imageArr.size(); i++) {
-            images.add(AppNetConfig.BASE_URL + imageArr.get(i).getIMAURL());
-            //Log.e("TAG","imaurl==" + AppNetConfig.BASE_URL + imageArr.get(i).getIMAURL());
+        if (imageArr != null && imageArr.size() > 0) {
+            //Log.e("TAG","imaurl==" + imageArr.size());
+            banner.setImageLoader(new GlideImageLoader());
+            //设置图片集合
+            images = new ArrayList<>();
 
+            for (int i = 0; i < imageArr.size(); i++) {
+                images.add(AppNetConfig.BASE_URL + imageArr.get(i).getIMAURL());
+                //Log.e("TAG","imaurl==" + AppNetConfig.BASE_URL + imageArr.get(i).getIMAURL());
+
+            }
+
+
+            banner.setImages(images);
+            //banner设置方法全部调用完毕时最后调用
+            banner.start();
         }
 
-
-        banner.setImages(images);
-        //banner设置方法全部调用完毕时最后调用
-        banner.start();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.reset(this);
     }
 
 
@@ -242,10 +230,6 @@ public class HomeFragment extends Fragment {
 
             //Picasso 加载图片简单用法
             Picasso.with(context).load((String) path).into(imageView);
-
-
         }
-
     }
-
 }

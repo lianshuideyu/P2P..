@@ -1,53 +1,25 @@
 package com.atguigu.p2p.fragment;
 
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import com.atguigu.p2p.base.BaseFragment;
 
 /**
  * Created by Administrator on 2017/6/20.
  */
 
-public class PropertyFragment extends Fragment {
-
-    private TextView textView;
+public class PropertyFragment extends BaseFragment {
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        return initView();
-    }
-
-    private View initView() {
-        textView = new TextView(getActivity());
-        textView.setTextColor(Color.RED);
-        textView.setTextSize(25);
-
-        return textView;
+    public int setLayoutId() {
+        return 0;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    protected void initTitle() {
 
-        initData();
     }
 
-    /**
-     * 添加数据
-     */
-    private void initData() {
-        textView.setText("资产");
+    @Override
+    protected void initData() {
+
     }
 }
