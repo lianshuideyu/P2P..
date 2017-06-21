@@ -16,9 +16,8 @@ import com.alibaba.fastjson.JSON;
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.bean.IndexBean;
 import com.atguigu.p2p.common.AppNetConfig;
+import com.atguigu.p2p.utils.HttpUtils;
 import com.atguigu.p2p.utils.UIUtils;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -93,27 +92,19 @@ public class HomeFragment extends Fragment {
      */
     private void getDataFromNet() {
 
-        AsyncHttpClient client = new AsyncHttpClient();
-
-        client.get(AppNetConfig.INDEX, new AsyncHttpResponseHandler() {
+        HttpUtils.getInstance().get(AppNetConfig.INDEX, new HttpUtils.MyHttpClickListener() {
             @Override
-            public void onSuccess(int statusCode, String content) {
-                super.onSuccess(statusCode, content);
+            public void onSuccess(String content) {
+                //联网成功
                 Log.e("TAG", "HomeFragment联网成功==" + content);
-
-                //解析数据
-                //processData(content);
-
-
-                //手动解析
-                processData2(content);
+                processData(content);
             }
 
             @Override
-            public void onFailure(Throwable error, String content) {
-                super.onFailure(error, content);
-
+            public void onFailure(String content) {
+                //联网失败
                 Log.e("TAG", "HomeFragment联网失败==" + content);
+
             }
         });
     }
@@ -123,9 +114,6 @@ public class HomeFragment extends Fragment {
             indexBean = JSON.parseObject(json, IndexBean.class);
 
             //Log.e("TAG","HomeFragment解析数据成功==" + indexBean.getProInfo().getName());
-
-            //添加banner数据
-
 
             //添加banner数据
             //设置图片加载器
