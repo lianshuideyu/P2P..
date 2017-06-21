@@ -42,6 +42,17 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         *
         *
         * */
+
+        //方法二利用线程池
+//        ThreadManager.getInstance().getThread().execute(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        });
+
+
+        //方法一
         new Thread(){
             public void run(){
                 Looper.prepare();
