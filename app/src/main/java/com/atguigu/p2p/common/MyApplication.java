@@ -20,5 +20,9 @@ public class MyApplication extends Application {
         super.onCreate();
 
         context = this;
+
+        //初始化异常处理，暂时先注掉，方便处理异常
+        //CrashHandler.getInstance().init(this);
+
     }
 }

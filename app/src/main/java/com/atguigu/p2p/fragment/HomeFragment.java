@@ -69,7 +69,8 @@ public class HomeFragment extends Fragment {
      * 添加数据
      */
     private void initData() {
-
+        //测试异常
+        //int i = 1 / 0;
     }
 
     @Override
