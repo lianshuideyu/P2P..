@@ -43,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
         //设置版本号
         splash_tv_version.setText(
                 UIUtils.getVersionFromat(
-                        splash_tv_version.getText().toString(), getVersion()
+                        R.string.verson_name, getVersion()
                                         )
                                 );
 
