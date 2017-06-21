@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.atguigu.p2p.R;
+import com.atguigu.p2p.common.AppManager;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -21,6 +22,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        //添加到Activity的管理栈
+        AppManager.getInstance().addActivity(this);
 
         activity_splash = (RelativeLayout)findViewById(R.id.activity_splash);
         splash_tv_version = (TextView) findViewById(R.id.splash_tv_version);
@@ -110,5 +114,13 @@ public class SplashActivity extends AppCompatActivity {
     private boolean isLogin(){
         
         return true;
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //推出的时候关闭移除
+        AppManager.getInstance().removeActivity(this);
     }
 }

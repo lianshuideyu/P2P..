@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.atguigu.p2p.R;
+import com.atguigu.p2p.common.AppManager;
 import com.atguigu.p2p.fragment.HomeFragment;
 import com.atguigu.p2p.fragment.InvestFragment;
 import com.atguigu.p2p.fragment.MoreFragment;
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+
+        //添加到Activity的管理栈
+        AppManager.getInstance().addActivity(this);
 
         initFragment();
 
@@ -141,5 +145,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //推出的时候关闭移除
+        AppManager.getInstance().removeActivity(this);
     }
 }
