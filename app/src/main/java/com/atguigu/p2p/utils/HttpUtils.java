@@ -44,7 +44,6 @@ public class HttpUtils {
                 httpListener.onSuccess(content);
 
             }
-
         }
 
         @Override
