@@ -44,8 +44,40 @@ public class MyScrollView extends ScrollView {
         }
     }
 
+    private float lastX ;
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+
+        boolean isOnIntercept = false;
+        switch (ev.getAction()) {
+            case  MotionEvent.ACTION_DOWN:
+                lastX = ev.getX();
+                lastY = ev.getY();
 
 
+                break;
+            case  MotionEvent.ACTION_MOVE:
+                float eventY = ev.getY();
+                float eventX = ev.getX();
+
+                float distanceX = Math.abs(eventX - lastX);
+                float distanceY = Math.abs(eventY - lastY);
+                if(distanceY > distanceX && distanceY > 20) {
+                    //拦截banner 的事件
+                    isOnIntercept = true;
+
+                }
+
+                lastX = ev.getX();
+                lastY = ev.getY();
+                break;
+        }
+
+
+
+
+        return isOnIntercept;
+    }
 
     private float lastY;
     private Rect rect;
