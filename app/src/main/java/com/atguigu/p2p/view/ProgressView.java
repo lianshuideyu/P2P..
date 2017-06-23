@@ -1,5 +1,6 @@
 package com.atguigu.p2p.view;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,17 +21,25 @@ public class ProgressView extends View {
     //环边 的宽度
     int strokeWidth ;
 
-    int paintColor = Color.BLUE;
+    int paintColor = Color.GRAY;
 
     int width ;
     int heigth;
 
-    int progress = 60;
+    int progress = 0;
     int max = 100;
 
     private Paint paint;
 
-    private float sweepAngle = 60;//圆弧进度的覆盖的角度
+    private float sweepAngle = 0;//圆弧进度的覆盖的角度
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
 
     public ProgressView(Context context) {
         super(context);
@@ -115,5 +124,35 @@ public class ProgressView extends View {
 
         canvas.drawText(text,textX,textY,paint);
 
+    }
+
+    /*
+    * 面试题：
+    * invalidate和postInvalidate的区别是什么
+    * invalidate是主线程进行强制重绘
+    * postInvalidate是分线程进行强制重绘
+    * */
+    public void startProgress(int progress){
+
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(0, progress);
+
+        valueAnimator.setDuration(3000);//动画执行的时间
+
+        //监听动画
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+
+                int value = (int) valueAnimator.getAnimatedValue();
+
+                ProgressView.this.progress = value;
+
+                postInvalidate();//强行绘制
+
+
+            }
+        });
+
+        valueAnimator.start();
     }
 }

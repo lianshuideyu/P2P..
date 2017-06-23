@@ -112,6 +112,7 @@
                 <!--atguigu:textColor="@color/title_back"-->
                 <!--atguigu:textSize="20dp" />-->
             <com.atguigu.p2p.view.ProgressView
+                android:id="@+id/progressView"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 />

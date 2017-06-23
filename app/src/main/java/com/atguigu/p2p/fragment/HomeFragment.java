@@ -12,6 +12,7 @@ import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.bean.IndexBean;
 import com.atguigu.p2p.common.AppNetConfig;
 import com.atguigu.p2p.utils.HttpUtils;
+import com.atguigu.p2p.view.ProgressView;
 import com.squareup.picasso.Picasso;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -44,6 +45,8 @@ public class HomeFragment extends BaseFragment {
     TextView tvHomeProduct;
     @InjectView(R.id.tv_home_yearrate)
     TextView tvHomeYearrate;
+    @InjectView(R.id.progressView)
+    ProgressView progressView;
 
     private IndexBean indexBean;
 
@@ -109,6 +112,11 @@ public class HomeFragment extends BaseFragment {
             //添加banner数据
             //设置图片加载器
             initBanner();
+
+            //将圆形进入的值设置到progressView中
+            int progress = Integer.parseInt(indexBean.getProInfo().getProgress());
+            progressView.startProgress(progress);
+
         } else {
 
             Log.e("TAG", "HomeFragment解析没有数据");
@@ -217,6 +225,7 @@ public class HomeFragment extends BaseFragment {
         }
 
     }
+
 
 
     public class GlideImageLoader extends ImageLoader {
