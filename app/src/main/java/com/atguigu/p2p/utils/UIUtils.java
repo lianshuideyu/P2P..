@@ -57,4 +57,16 @@ public class UIUtils {
         float density = getContext().getResources().getDisplayMetrics().density;
         return (int) (px / density + 0.5);//实现四舍五入
     }
+
+    public static void runOnUiThread(Runnable runnable){
+        //比较pid来判断是否在主线程
+        if(android.os.Process.myTid() == MyApplication.getThreadid()) {
+            runnable.run();
+        }else {
+            //此时是在子线程中执行的需要切换到主线程，直接交给handler处理
+            MyApplication.getHandler().post(runnable);
+
+        }
+
+    }
 }

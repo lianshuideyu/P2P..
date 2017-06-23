@@ -9,6 +9,16 @@ import com.atguigu.p2p.base.BaseFragment;
 public class MoreFragment extends BaseFragment {
 
     @Override
+    protected void initData(String json) {
+
+    }
+
+    @Override
+    protected String getChildUrl() {
+        return null;
+    }
+
+    @Override
     public int setLayoutId() {
         return 0;
     }

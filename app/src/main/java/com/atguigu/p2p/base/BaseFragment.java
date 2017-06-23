@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.atguigu.p2p.ui.LoadingPager;
+
 import butterknife.ButterKnife;
 
 /**
@@ -15,6 +17,8 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseFragment extends Fragment {
+
+    public LoadingPager loadingPager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,17 +29,46 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        loadingPager = new LoadingPager(getActivity()) {
+            @Override
+            protected void setJson(String json) {
+                initData(json);
+            }
+
+            @Override
+            public String getUrl() {
+                return getChildUrl();
+            }
+
+            @Override
+            public int getViewId() {
+                return setLayoutId();
+            }
+
+            @Override
+            protected void onSuccess(View sucessView) {
+                ButterKnife.inject(BaseFragment.this,loadingPager);
+
+                //initData("");//此处应该传入json数据， 先传一个假数据
+
+            }
+        };
+
         if(setLayoutId() == 0) {
             TextView textView = new TextView(getActivity());
             textView.setText("布局文件不能为空");
             return textView;
         }
 
-        View view = View.inflate(getActivity(),setLayoutId(),null);
+        //View view = View.inflate(getActivity(),setLayoutId(),null);
 
-        ButterKnife.inject(this,view);
-        return view;
+
+        return loadingPager;
     }
+
+    protected abstract void initData(String json);
+
+    protected abstract String getChildUrl();
 
     public abstract int setLayoutId();
 
@@ -62,7 +95,7 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initData();
 
     public void initView(){
-
+        loadingPager.loadData();//联网
     }
 
     @Override

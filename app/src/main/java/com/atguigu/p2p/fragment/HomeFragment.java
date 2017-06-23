@@ -30,7 +30,7 @@ import butterknife.InjectView;
  * Created by Administrator on 2017/6/20.
  */
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment{
 
     @InjectView(R.id.base_back)
     ImageView baseBack;
@@ -54,6 +54,17 @@ public class HomeFragment extends BaseFragment {
 
 
     @Override
+    protected void initData(String json) {
+        //获得json数据
+        //processData(json);
+    }
+
+    @Override
+    protected String getChildUrl() {
+        return AppNetConfig.INDEX;
+    }
+
+    @Override
     public int setLayoutId() {
         return R.layout.fragment_home;
     }
@@ -61,13 +72,14 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void initView() {
         super.initView();
+        //这里在父类Basefragmetn中做了联网并加载布局
 
     }
 
 
     @Override
     protected void initTitle() {
-        baseTitle.setText("首页");
+        //baseTitle.setText("首页");
 
     }
 
@@ -77,7 +89,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initData() {
 
-        getDataFromNet();
+        //getDataFromNet();
     }
 
 
