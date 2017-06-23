@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProgressView">
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="paintColor" format="color"/>
+        <attr name="progress" format="integer"/>
+        <attr name="max" format="integer"/>
+
+
+    </declare-styleable>
+    <!--int strokeWidth ;
+
+    int paintColor = Color.GRAY;
+
+    int progress = 0;
+    int max = 100;-->
+</resources>

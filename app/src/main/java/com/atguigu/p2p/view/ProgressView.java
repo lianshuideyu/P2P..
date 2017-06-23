@@ -2,6 +2,7 @@ package com.atguigu.p2p.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,6 +11,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.atguigu.p2p.R;
 import com.atguigu.p2p.utils.UIUtils;
 
 /**
@@ -21,15 +23,14 @@ public class ProgressView extends View {
     //环边 的宽度
     int strokeWidth ;
 
-    int paintColor = Color.GRAY;
-
-    int width ;
-    int heigth;
+    int paintColor ;
 
     int progress = 0;
     int max = 100;
 
     private Paint paint;
+    int width ;
+    int heigth;
 
     private float sweepAngle = 0;//圆弧进度的覆盖的角度
 
@@ -50,6 +51,16 @@ public class ProgressView extends View {
         super(context, attrs);
 
         initPaint();
+
+        //自定义属性
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ProgressView);
+
+        paintColor = typedArray.getColor(R.styleable.ProgressView_paintColor,Color.BLACK);
+        progress = typedArray.getInteger(R.styleable.ProgressView_progress,90);
+        max = typedArray.getInteger(R.styleable.ProgressView_max,100);
+        strokeWidth = (int) typedArray.getDimension(R.styleable.ProgressView_strokeWidth,15);
+
+
     }
 
     /**
@@ -148,7 +159,6 @@ public class ProgressView extends View {
                 ProgressView.this.progress = value;
 
                 postInvalidate();//强行绘制
-
 
             }
         });
