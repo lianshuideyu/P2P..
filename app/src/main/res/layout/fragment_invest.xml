@@ -9,7 +9,6 @@
         android:layout_height="45dp"
         android:orientation="horizontal">
 
-
         <TextView
             android:id="@+id/tv_invest_all"
             android:layout_width="0dp"
