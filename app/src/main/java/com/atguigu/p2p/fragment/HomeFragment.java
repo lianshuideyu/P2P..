@@ -38,6 +38,8 @@ public class HomeFragment extends BaseFragment{
     ImageView baseSetting;
 
 //    private TextView baseTitle;
+    @InjectView(R.id.base_title)
+    TextView baseTitle;
 
     @InjectView(R.id.banner)
     Banner banner;
@@ -79,7 +81,7 @@ public class HomeFragment extends BaseFragment{
 
     @Override
     protected void initTitle() {
-//        baseTitle.setText("首页");
+        baseTitle.setText("首页");
 
     }
 

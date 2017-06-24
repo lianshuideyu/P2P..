@@ -38,13 +38,16 @@ public abstract class BaseFragment extends Fragment {
             }
 
             @Override
-            public int getViewId() {
-                return setLayoutId();
+            public View getView() {
+                View view = View.inflate(getContext(),setLayoutId(),null);
+
+                ButterKnife.inject(BaseFragment.this,view);
+                return view;
             }
 
             @Override
-            protected void onSuccess(View sucessView, String json) {
-                ButterKnife.inject(BaseFragment.this,sucessView);
+            protected void setResult(View sucessView, String json) {
+//                ButterKnife.inject(BaseFragment.this,sucessView);
 //initData("");//此处应该传入json数据， 先传一个假数据
 
                 initData(json);

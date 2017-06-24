@@ -90,7 +90,8 @@ public abstract class LoadingPager extends FrameLayout {
 
 
         if(sucessView == null) {
-            sucessView = View.inflate(context,getViewId(),null);//动态添加,实际调用的是子类的getViewId()方法
+//            sucessView = View.inflate(context,getViewId(),null);//动态添加,实际调用的是子类的getViewId()方法
+            sucessView = getView();//动态添加,实际调用的是子类的getViewId()方法
             this.addView(sucessView);
         }
         sucessView.setVisibility(current_state == STATE_SUCCESS ? View.VISIBLE : View.INVISIBLE);
@@ -108,6 +109,8 @@ public abstract class LoadingPager extends FrameLayout {
             current_state = STATE_SUCCESS;
             showSafeView();
 
+            //回传信息
+            setResult(sucessView,"");
         }else {
 
 //        Log.e("TAG","测试url==" + url);
@@ -125,7 +128,7 @@ public abstract class LoadingPager extends FrameLayout {
                         }else {
                             current_state = STATE_SUCCESS;
 
-                            LoadingPager.this.onSuccess(sucessView, content);
+                            LoadingPager.this.setResult(sucessView, content);
 //                    setJson(content);
 
                         }
@@ -156,8 +159,9 @@ public abstract class LoadingPager extends FrameLayout {
     public abstract String getUrl();
 
 
-    public abstract int getViewId() ;//由子类实现
+//    public abstract int getViewId() ;//由子类实现
+    public abstract View getView() ;//由子类实现
 
     //加载页面的方法
-    protected abstract void onSuccess(View sucessView,String json);
+    protected abstract void setResult(View sucessView, String json);
 }

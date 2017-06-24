@@ -80,8 +80,8 @@ public class HttpUtils {
 //
 //        httpClient.post(url,requestParams,new AsyncHttpResponseHandler(){
 //            @Override
-//            public void onSuccess(int statusCode, String content) {
-//                super.onSuccess(statusCode, content);
+//            public void setResult(int statusCode, String content) {
+//                super.setResult(statusCode, content);
 //            }
 //
 //            @Override
