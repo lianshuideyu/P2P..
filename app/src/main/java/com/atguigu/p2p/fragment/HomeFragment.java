@@ -37,8 +37,8 @@ public class HomeFragment extends BaseFragment{
     @InjectView(R.id.base_setting)
     ImageView baseSetting;
 
-    @InjectView(R.id.base_title)
-    TextView baseTitle;
+//    private TextView baseTitle;
+
     @InjectView(R.id.banner)
     Banner banner;
     @InjectView(R.id.tv_home_product)
@@ -56,7 +56,7 @@ public class HomeFragment extends BaseFragment{
     @Override
     protected void initData(String json) {
         //获得json数据
-        //processData(json);
+        processData(json);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class HomeFragment extends BaseFragment{
 
     @Override
     protected void initTitle() {
-        //baseTitle.setText("首页");
+//        baseTitle.setText("首页");
 
     }
 

@@ -3,7 +3,6 @@ package com.atguigu.p2p.view;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -79,6 +78,21 @@ public class MyScrollView extends ScrollView {
         return isOnIntercept;
     }
 
+
+      /*
+    * 面试题：
+    * getY()和getRawY()的区别
+    * getY :指的是当前布局到父布局之间y轴的距离
+    * getRawY : 指的是当前布局到屏幕之间Y轴的距离
+    *
+    * */
+
+    /*
+    * rect 和 rectf的区别
+    * rect存int
+    * rectf存float
+    *
+    * */
     private float lastY;
     private Rect rect;
 
@@ -100,7 +114,7 @@ public class MyScrollView extends ScrollView {
         }
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                Log.e("TAG", "ACTION_DOWN");
+//                Log.e("TAG", "ACTION_DOWN");
                 lastY = eventY;
 
                 break;
@@ -130,7 +144,7 @@ public class MyScrollView extends ScrollView {
 
                 break;
             case MotionEvent.ACTION_UP:
-                Log.e("TAG", "ACTION_UP");
+//                Log.e("TAG", "ACTION_UP");
                 //处理回弹效果
                 if (!rect.isEmpty()) {
                     float disY = childView.getTop() - rect.top;
@@ -140,7 +154,7 @@ public class MyScrollView extends ScrollView {
                      */
                     TranslateAnimation animation = new TranslateAnimation(0,0,0,-disY);
 
-                    animation.setDuration(2000);
+                    animation.setDuration(300);
 
 
                     animation.setAnimationListener(new Animation.AnimationListener() {

@@ -47,6 +47,13 @@ public class ProgressView extends View {
         initPaint();
     }
 
+
+    /*
+    * 自定义属性 三步
+    * 第一步 创建attrs文件
+    * 第二步 在自定义控件构造器方法中 实例化attrs对象并获取属性名称和默认值
+    * 第三步 在布局文件中使用自定义的属性
+    * */
     public ProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -142,6 +149,17 @@ public class ProgressView extends View {
     * invalidate和postInvalidate的区别是什么
     * invalidate是主线程进行强制重绘
     * postInvalidate是分线程进行强制重绘
+    * */
+
+    /*
+    * 面试题：
+    * android中动画有几种？
+    * 三种
+    * 1 属性动画 ：真正的改变了控件的属性
+    * 2 帧动画 ： 把多张图片串联起来实现连续播放的效果
+    * 3 视图动画 ：普通动画虽然控件位置或者大小发生了变化，但属性并没有真正的改变，控件的监听位置并无发生改变
+    *
+    *
     * */
     public void startProgress(int progress){
 

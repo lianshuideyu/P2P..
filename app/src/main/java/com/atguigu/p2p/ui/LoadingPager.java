@@ -112,6 +112,8 @@ public abstract class LoadingPager extends FrameLayout {
                 //processData(content);
                 if(!TextUtils.isEmpty(content)) {
                     current_state = STATE_SUCCESS;
+
+                    LoadingPager.this.onSuccess(sucessView);
                     setJson(content);
 
                 }else {

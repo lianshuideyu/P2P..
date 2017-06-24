@@ -3,6 +3,7 @@ package com.atguigu.p2p.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public abstract class BaseFragment extends Fragment {
             @Override
             protected void setJson(String json) {
                 initData(json);
+                Log.e("TAG","baseFragment==json==" + json);
             }
 
             @Override
@@ -47,7 +49,7 @@ public abstract class BaseFragment extends Fragment {
 
             @Override
             protected void onSuccess(View sucessView) {
-                ButterKnife.inject(BaseFragment.this,loadingPager);
+                ButterKnife.inject(BaseFragment.this,sucessView);
 
                 //initData("");//此处应该传入json数据， 先传一个假数据
 
