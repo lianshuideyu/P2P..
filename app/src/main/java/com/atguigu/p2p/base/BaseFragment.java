@@ -43,6 +43,9 @@ public abstract class BaseFragment extends Fragment {
                 return getChildUrl();
             }
 
+            /*
+            加载不加载网络都会执行
+             */
             @Override
             public View getView() {
                 View view = View.inflate(getContext(),setLayoutId(),null);
@@ -58,14 +61,23 @@ public abstract class BaseFragment extends Fragment {
 
                 initData(json);
                 Log.e("TAG","baseFragment==json==" + json);
+
+                //保证在主线程执行
+//                UIUtils.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        initView();
+//                        initTitle();
+//                        initData();
+//                        initListener();
+//                    }
+//                });
             }
 
         };
 
 
-
         //View view = View.inflate(getActivity(),setLayoutId(),null);
-
 
         return loadingPager;
     }

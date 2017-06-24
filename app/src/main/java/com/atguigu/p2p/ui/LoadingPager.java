@@ -109,7 +109,7 @@ public abstract class LoadingPager extends FrameLayout {
             current_state = STATE_SUCCESS;
             showSafeView();
 
-            //回传信息
+            //回传信息，主要是布局
             setResult(sucessView,"");
         }else {
 

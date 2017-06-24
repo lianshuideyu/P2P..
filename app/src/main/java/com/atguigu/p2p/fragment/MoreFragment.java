@@ -1,8 +1,6 @@
 package com.atguigu.p2p.fragment;
 
-import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
-import com.atguigu.p2p.common.AppNetConfig;
 
 /**
  * Created by Administrator on 2017/6/20.
@@ -17,12 +15,12 @@ public class MoreFragment extends BaseFragment {
 
     @Override
     protected String getChildUrl() {
-        return  AppNetConfig.INDEX;
+        return  "";
     }
 
     @Override
     public int setLayoutId() {
-        return R.layout.fragment_home;
+        return 0;
     }
 
     @Override
