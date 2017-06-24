@@ -30,6 +30,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        if(setLayoutId() == 0) {
+            TextView textView = new TextView(getActivity());
+            textView.setText("布局文件不能为空");
+            return textView;
+        }
+
         loadingPager = new LoadingPager(getActivity()) {
 
             @Override
@@ -56,11 +62,7 @@ public abstract class BaseFragment extends Fragment {
 
         };
 
-        if(setLayoutId() == 0) {
-            TextView textView = new TextView(getActivity());
-            textView.setText("布局文件不能为空");
-            return textView;
-        }
+
 
         //View view = View.inflate(getActivity(),setLayoutId(),null);
 
@@ -97,7 +99,10 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initData();
 
     public void initView(){
-        loadingPager.loadData();//联网
+        if(setLayoutId() != 0) {
+
+            loadingPager.loadData();//联网
+        }
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.atguigu.p2p.fragment;
 
-import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
 
 /**
@@ -22,7 +21,7 @@ public class InvestFragment extends BaseFragment {
 
     @Override
     public int setLayoutId() {
-        return R.layout.fragment_home;
+        return 0;
     }
 
     @Override
