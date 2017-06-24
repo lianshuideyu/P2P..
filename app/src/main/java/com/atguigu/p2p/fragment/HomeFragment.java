@@ -61,7 +61,7 @@ public class HomeFragment extends BaseFragment{
 
     @Override
     protected String getChildUrl() {
-        return AppNetConfig.INDEX;
+        return AppNetConfig.INDEX ;
     }
 
     @Override

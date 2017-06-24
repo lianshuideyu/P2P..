@@ -1,5 +1,6 @@
 package com.atguigu.p2p.fragment;
 
+import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
 
 /**
@@ -16,12 +17,12 @@ public class InvestFragment extends BaseFragment {
 
     @Override
     protected String getChildUrl() {
-        return null;
+        return "";
     }
 
     @Override
     public int setLayoutId() {
-        return 0;
+        return R.layout.fragment_home;
     }
 
     @Override

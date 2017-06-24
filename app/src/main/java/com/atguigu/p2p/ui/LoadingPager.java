@@ -103,45 +103,61 @@ public abstract class LoadingPager extends FrameLayout {
      */
     public void loadData(){
         String url = getUrl();
+        if(TextUtils.isEmpty(url)) {//判断是否要联网
+            //此时 需要加载不需联网的页面
+            current_state = STATE_SUCCESS;
+            showSafeView();
 
-        HttpUtils.getInstance().get(url, new HttpUtils.MyHttpClickListener() {
-            @Override
-            public void onSuccess(String content) {
-                //联网成功
-                Log.e("TAG", "LoadingPager联网成功==" + content);
-                //processData(content);
-                if(!TextUtils.isEmpty(content)) {
-                    current_state = STATE_SUCCESS;
+        }else {
 
-                    LoadingPager.this.onSuccess(sucessView);
-                    setJson(content);
+//        Log.e("TAG","测试url==" + url);
+            HttpUtils.getInstance().get(url, new HttpUtils.MyHttpClickListener() {
+                @Override
+                public void onSuccess(String content) {
+                    //联网成功
+                    Log.e("TAG", "LoadingPager联网成功==" + content);
+                    //processData(content);
+                    if(!TextUtils.isEmpty(content)) {
 
-                }else {
-                    current_state = STATE_LOADING;
+                        if(content.indexOf("title") > 0) {//错误的页面为H5页面信息
+                            //此时为错误的加载页面,一般为网址错误
+                            current_state = STATE_ERROR;
+                        }else {
+                            current_state = STATE_SUCCESS;
+
+                            LoadingPager.this.onSuccess(sucessView, content);
+//                    setJson(content);
+
+                        }
+                    }else {
+                        current_state = STATE_LOADING;
+
+                    }
+                    showSafeView();//重新显示一下布局
 
                 }
-                showSafeView();//重新显示一下布局
 
-            }
+                @Override
+                public void onFailure(String content) {
+                    //联网失败
+                    Log.e("TAG", "LoadingPager联网失败==" + content);
+                    current_state = STATE_ERROR;
 
-            @Override
-            public void onFailure(String content) {
-                //联网失败
-                Log.e("TAG", "LoadingPager联网失败==" + content);
-                current_state = STATE_ERROR;
+                    showSafeView();
+                }
+            });
 
-                showSafeView();
-            }
-        });
+        }
 
     }
 
-    protected abstract void setJson(String json);
+//    protected abstract void setJson(String json);
 
     public abstract String getUrl();
 
 
     public abstract int getViewId() ;//由子类实现
 
-    protected abstract void onSuccess(View sucessView);
+    //加载页面的方法
+    protected abstract void onSuccess(View sucessView,String json);
 }

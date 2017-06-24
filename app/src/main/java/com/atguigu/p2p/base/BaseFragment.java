@@ -31,11 +31,6 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         loadingPager = new LoadingPager(getActivity()) {
-            @Override
-            protected void setJson(String json) {
-                initData(json);
-                Log.e("TAG","baseFragment==json==" + json);
-            }
 
             @Override
             public String getUrl() {
@@ -48,12 +43,14 @@ public abstract class BaseFragment extends Fragment {
             }
 
             @Override
-            protected void onSuccess(View sucessView) {
+            protected void onSuccess(View sucessView, String json) {
                 ButterKnife.inject(BaseFragment.this,sucessView);
+//initData("");//此处应该传入json数据， 先传一个假数据
 
-                //initData("");//此处应该传入json数据， 先传一个假数据
-
+                initData(json);
+                Log.e("TAG","baseFragment==json==" + json);
             }
+
         };
 
         if(setLayoutId() == 0) {
