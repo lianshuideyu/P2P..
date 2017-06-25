@@ -8,7 +8,7 @@ import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.bean.InvestProductBean;
 import com.atguigu.p2p.common.AppNetConfig;
-import com.atguigu.p2p.fragment.investfragment.adapter.ImpAdapter1;
+import com.atguigu.p2p.fragment.investfragment.adapter.ImpAdapter2;
 import com.atguigu.p2p.fragment.investfragment.adapter.InvestAllAdapter;
 
 import java.util.List;
@@ -35,12 +35,14 @@ public class InvestAllFragment extends BaseFragment {
         Log.e("TAG", "InvestAllFragment解析数据: " + productBean.getData().get(0).getName());
         datas = productBean.getData();
 
-        if(datas != null && datas.size() > 0) {
+        if (datas != null && datas.size() > 0) {
 
 //            adapter = new InvestAllAdapter(getActivity(),datas);
 //            lvInvestAll.setAdapter(adapter);
 
-            lvInvestAll.setAdapter(new ImpAdapter1(getActivity(),datas));
+// 抽取方法一   lvInvestAll.setAdapter(new ImpAdapter1(getActivity(),datas));
+            lvInvestAll.setAdapter(new ImpAdapter2(getActivity(), datas));
+
         }
     }
 
