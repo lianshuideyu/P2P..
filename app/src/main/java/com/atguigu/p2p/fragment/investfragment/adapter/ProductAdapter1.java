@@ -11,6 +11,13 @@ import java.util.List;
  * Created by Administrator on 2017/6/24.
  */
 
+/*
+*
+* 第一种抽取方法 只是在getView中添加了一个抽象方法
+*  注意：
+*       返回view
+*
+* */
 public abstract class ProductAdapter1<T> extends BaseAdapter {
 
     public final List<T> datas;
