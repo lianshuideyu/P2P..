@@ -1,4 +1,4 @@
-package com.atguigu.p2p.fragment.investfragment;
+package com.atguigu.p2p.fragment.investfragment.fragment;
 
 import android.util.Log;
 import android.widget.ListView;
@@ -8,6 +8,7 @@ import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.bean.InvestProductBean;
 import com.atguigu.p2p.common.AppNetConfig;
+import com.atguigu.p2p.fragment.investfragment.adapter.ImpAdapter1;
 import com.atguigu.p2p.fragment.investfragment.adapter.InvestAllAdapter;
 
 import java.util.List;
@@ -36,9 +37,10 @@ public class InvestAllFragment extends BaseFragment {
 
         if(datas != null && datas.size() > 0) {
 
-            adapter = new InvestAllAdapter(getActivity(),datas);
-            lvInvestAll.setAdapter(adapter);
+//            adapter = new InvestAllAdapter(getActivity(),datas);
+//            lvInvestAll.setAdapter(adapter);
 
+            lvInvestAll.setAdapter(new ImpAdapter1(getActivity(),datas));
         }
     }
 

@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
-import com.atguigu.p2p.fragment.investfragment.InvestAllFragment;
-import com.atguigu.p2p.fragment.investfragment.InvestHotFragment;
-import com.atguigu.p2p.fragment.investfragment.InvestRecFragment;
+import com.atguigu.p2p.fragment.investfragment.fragment.InvestAllFragment;
+import com.atguigu.p2p.fragment.investfragment.fragment.InvestHotFragment;
+import com.atguigu.p2p.fragment.investfragment.fragment.InvestRecFragment;
 
 import java.util.ArrayList;
 import java.util.List;

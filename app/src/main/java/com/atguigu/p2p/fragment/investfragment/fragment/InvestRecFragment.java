@@ -1,4 +1,4 @@
-package com.atguigu.p2p.fragment.investfragment;
+package com.atguigu.p2p.fragment.investfragment.fragment;
 
 import android.graphics.Color;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.atguigu.p2p.fragment.investfragment;
+package com.atguigu.p2p.fragment.investfragment.fragment;
 
 import com.atguigu.p2p.base.BaseFragment;
 
