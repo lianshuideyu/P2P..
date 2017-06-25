@@ -19,6 +19,6 @@ public class ImpAdapter3 extends ProductAdapter3<InvestProductBean.DataBean> {
     @Override
     public BaseHolder getViewHolder(InvestProductBean.DataBean dataBean) {
 
-        return new ImpHolder3(dataBean);
+        return new ImpHolder3();
     }
 }

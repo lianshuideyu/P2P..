@@ -61,38 +61,11 @@ public abstract class ProductAdapter3<T> extends BaseAdapter {
 
         }
 
-//        InvestProductBean.DataBean dataBean = datas.get(position);
-//        viewHolder.pName.setText(dataBean.getName());
-//        viewHolder.pMoney.setText(dataBean.getMoney());
-//        viewHolder.pYearlv.setText(dataBean.getYearRate());
-//        viewHolder.pSuodingdays.setText(dataBean.getSuodingDays());
-//        viewHolder.pMinzouzi.setText(dataBean.getMinTouMoney());
-//        viewHolder.pMinnum.setText(dataBean.getMemberNum());
-//        viewHolder.pProgresss.setProgress(Integer.parseInt(dataBean.getProgress()));
+        viewHolder.setData(datas.get(position));
 
         return viewHolder.getView();
     }
 
     public abstract BaseHolder getViewHolder(T t) ;
 
-//    static class ViewHolder {
-//        @InjectView(R.id.p_name)
-//        TextView pName;
-//        @InjectView(R.id.p_money)
-//        TextView pMoney;
-//        @InjectView(R.id.p_yearlv)
-//        TextView pYearlv;
-//        @InjectView(R.id.p_suodingdays)
-//        TextView pSuodingdays;
-//        @InjectView(R.id.p_minzouzi)
-//        TextView pMinzouzi;
-//        @InjectView(R.id.p_minnum)
-//        TextView pMinnum;
-//        @InjectView(R.id.p_progresss)
-//        ProgressView pProgresss;
-//
-//        ViewHolder(View view) {
-//            ButterKnife.inject(this, view);
-//        }
-//    }
 }
