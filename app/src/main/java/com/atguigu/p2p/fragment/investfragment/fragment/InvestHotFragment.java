@@ -1,5 +1,6 @@
 package com.atguigu.p2p.fragment.investfragment.fragment;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
@@ -11,6 +12,8 @@ import com.atguigu.p2p.utils.UIUtils;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
+
+import java.util.Set;
 
 import butterknife.InjectView;
 
@@ -57,8 +60,8 @@ public class InvestHotFragment extends BaseFragment {
                 TextView tv = new TextView(getActivity());
                 tv.setTextSize(20);
                 tv.setText(s);
-                //设置文字的颜色随机
-                tv.setTextColor(UIUtils.getRandomColor());
+                //可以设置文字的颜色随机
+                tv.setTextColor(Color.WHITE);
                 Drawable drawable = getResources().getDrawable(R.drawable.hot_shape);
                 tv.setBackgroundDrawable(drawable);
                 //设置背景的颜色随机,只有GradientDrawable可以设置颜色
@@ -70,4 +73,18 @@ public class InvestHotFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public void initView() {
+        super.initView();
+
+        //点击事件
+        idFlowlayout.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
+            @Override
+            public void onSelected(Set<Integer> selectPosSet) {
+
+//                getActivity().setTitle("choose:" + selectPosSet.toString());
+            }
+        });
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.atguigu.p2p.fragment;
 
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -7,10 +8,11 @@ import android.widget.TextView;
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.common.AppNetConfig;
+import com.atguigu.p2p.utils.BitmapUtils;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import butterknife.InjectView;
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by Administrator on 2017/6/20.
@@ -65,9 +67,27 @@ public class PropertyFragment extends BaseFragment {
         //将头像设置为圆形
         Picasso.with(getActivity())
                 .load(AppNetConfig.BASE_URL+"images/tx.png")
-                .transform(new CropCircleTransformation())//加载圆形图片，transform可以设置多个
+                //.transform(new CropCircleTransformation())//加载圆形图片，transform可以设置多个
+                .transform(new MyCropCircleTransformation())
                 .into(ivMeIcon);
 
     }
 
+    /**
+     *
+     自定义CropCircleTransformation
+     */
+    class MyCropCircleTransformation implements Transformation{
+
+        @Override
+        public Bitmap transform(Bitmap source) {
+            Bitmap bitmap = BitmapUtils.getBitmap(source);
+            return bitmap;
+        }
+
+        @Override
+        public String key() {
+            return "CropCircleTransformation()";
+        }
+    }
 }
