@@ -108,6 +108,15 @@ public class PropertyFragment extends BaseFragment {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
+        }else {
+
+            //将头像设置为圆形
+            Picasso.with(getActivity())
+                    .load(R.drawable.my_user_default)
+                    //.transform(new CropCircleTransformation())//加载圆形图片，transform可以设置多个
+                    .into(ivMeIcon);
+            tvMeName.setText("用户名");
+
         }
 
 
@@ -129,5 +138,12 @@ public class PropertyFragment extends BaseFragment {
         public String key() {
             return "CropCircleTransformation()";
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        initData();
     }
 }
