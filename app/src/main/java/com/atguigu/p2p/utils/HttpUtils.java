@@ -2,6 +2,9 @@ package com.atguigu.p2p.utils;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/6/21.
@@ -73,15 +76,23 @@ public class HttpUtils {
        封装第三方联网框架
        * post联网请求
        * */
-//    public void post(String url, Map<String,String> map, MyHttpClickListener httpListener){
-//
-//        RequestParams requestParams = new RequestParams();
-//
-//
+    public void post(String url, Map<String,String> map, MyHttpClickListener httpListener){
+
+        this.httpListener = httpListener;
+        RequestParams requestParams = new RequestParams(map);
+
+//        Set<String> keys = map.keySet();
+//        for (String key : keys) {
+//            String value = map.get(key);
+//            requestParams.put(key,value);
+//        }
+
+
+        httpClient.post(url,requestParams,handler);
 //        httpClient.post(url,requestParams,new AsyncHttpResponseHandler(){
 //            @Override
-//            public void setResult(int statusCode, String content) {
-//                super.setResult(statusCode, content);
+//            public void onSuccess(int statusCode, String content) {
+//                super.onSuccess(statusCode, content);
 //            }
 //
 //            @Override
@@ -89,7 +100,8 @@ public class HttpUtils {
 //                super.onFailure(error, content);
 //            }
 //        });
-//
-//
-//    }
+
+
+
+    }
 }

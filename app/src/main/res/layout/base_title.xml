@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/base_title"
-        tools:text="首页"
+        tools:text="登录"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/left"
+        android:background="@drawable/ssdk_back_arr"
         android:visibility="gone" />
 
     <ImageView

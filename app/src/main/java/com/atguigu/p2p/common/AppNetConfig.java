@@ -21,7 +21,7 @@ public class AppNetConfig  {
     public static final String INDEX =BASE_URL +"index";//访问首页数据
 
     public static final String LOGIN =BASE_URL +"login";//访问登录的url
-
+    //http://47.93.118.241:8081/P2PInvest/login
     public static final String PRODUCT =BASE_URL +"product";//访问“所有理财”的url
     //http://47.93.118.241:8081/P2PInvest/product
     public static final String UPDATE =BASE_URL +"update.json";//访问服务器端当前应用的版本信息

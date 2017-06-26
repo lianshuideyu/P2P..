@@ -3,13 +3,18 @@ package com.atguigu.p2p.activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseActivity;
+import com.atguigu.p2p.bean.LoginBean;
+import com.atguigu.p2p.utils.SpUtils;
 import com.atguigu.p2p.utils.UIUtils;
 
 import butterknife.InjectView;
@@ -110,8 +115,18 @@ public class SplashActivity extends BaseActivity {
      * @return
      */
     private boolean isLogin() {
+        String admin = SpUtils.getSave(this, "admin");
+        Log.e("TAG","log拿到存储数据==" + admin);
+        if(TextUtils.isEmpty(admin)) {
+            return false;
+        }
+        LoginBean loginBean = JSONObject.parseObject(admin, LoginBean.class);
+        if(loginBean.isSuccess()) {
+            return true;
+        }else {
+            return false;
+        }
 
-        return true;
     }
 
 }
