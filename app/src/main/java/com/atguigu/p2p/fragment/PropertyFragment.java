@@ -1,19 +1,25 @@
 package com.atguigu.p2p.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.atguigu.p2p.R;
+import com.atguigu.p2p.activity.IconSettingActivity;
 import com.atguigu.p2p.base.BaseFragment;
+import com.atguigu.p2p.bean.LoginBean;
 import com.atguigu.p2p.common.AppNetConfig;
 import com.atguigu.p2p.utils.BitmapUtils;
 import com.atguigu.p2p.utils.SpUtils;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+
+import java.io.UnsupportedEncodingException;
 
 import butterknife.InjectView;
 
@@ -72,8 +78,8 @@ public class PropertyFragment extends BaseFragment {
         tvSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SpUtils.saveString(getActivity(),"admin","");
-                Toast.makeText(getContext(), "退出登录", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), IconSettingActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -82,14 +88,28 @@ public class PropertyFragment extends BaseFragment {
     @Override
     protected void initData() {
         //从保存的用户数据中得到数据并设置到布局上
+        String json = SpUtils.getSave(getContext(), "admin");
+        if(!TextUtils.isEmpty(json)) {
+            LoginBean loginBean = JSON.parseObject(json, LoginBean.class);
+            //因为之前头像的服务器地址失效了在这里重新设置
+            loginBean.getData().setImageurl(AppNetConfig.BASE_URL+"images/tx.png");
 
+            //将头像设置为圆形
+            Picasso.with(getActivity())
+                    .load(loginBean.getData().getImageurl())
+                    //.transform(new CropCircleTransformation())//加载圆形图片，transform可以设置多个
+                    .transform(new MyCropCircleTransformation())
+                    .into(ivMeIcon);
 
-        //将头像设置为圆形
-        Picasso.with(getActivity())
-                .load(AppNetConfig.BASE_URL+"images/tx.png")
-                //.transform(new CropCircleTransformation())//加载圆形图片，transform可以设置多个
-                .transform(new MyCropCircleTransformation())
-                .into(ivMeIcon);
+            String name = loginBean.getData().getName();
+            try {
+                String s = new String(name.getBytes(), "UTF-8");
+                tvMeName.setText(s);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }
 

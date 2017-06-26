@@ -16,6 +16,7 @@ import com.atguigu.p2p.utils.HttpUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,7 +80,13 @@ public class RegisterActivity extends BaseActivity {
                     if(pwd.equals(pwd2)) {
                         //联网提交注册信息
 //                        showToast("可以提交");
-                        registerForNet(numner,name,pwd);
+                        try {
+                            String s = new String(name.getBytes(), "UTF-8");
+                            registerForNet(numner,s,pwd);
+
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
 
                     }else {
                         showToast("请确认密码相同");

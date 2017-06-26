@@ -21,6 +21,7 @@ import com.atguigu.p2p.utils.SpUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -123,7 +124,13 @@ public class LoginActivity extends BaseActivity {
                         showToast("登录成功");
 
                         //保存数据到本地,保存的是json字符串
-                        SpUtils.saveString(LoginActivity.this,"admin",content);
+                        try {
+                            String savedata = new String(content.getBytes(), "UTF-8");
+                            SpUtils.saveString(LoginActivity.this,"admin",savedata);
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+
 
                         //启动mainActivity
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
