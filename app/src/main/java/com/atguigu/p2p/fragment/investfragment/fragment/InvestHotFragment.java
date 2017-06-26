@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
@@ -80,9 +81,16 @@ public class InvestHotFragment extends BaseFragment {
         //点击事件
         idFlowlayout.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
             @Override
-            public void onSelected(Set<Integer> selectPosSet) {
+            public void onSelected(final Set<Integer> selectPosSet) {
 
 //                getActivity().setTitle("choose:" + selectPosSet.toString());
+                UIUtils.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+//                        int last = selectPosSet.size() - 1;
+                        Toast.makeText(getActivity(), selectPosSet.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
