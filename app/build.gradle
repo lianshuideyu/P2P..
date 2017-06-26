@@ -31,4 +31,5 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile files('libs/android-async-http-master.jar')
     compile 'com.alibaba:fastjson:1.1.57.android'
+    compile 'com.zhy:flowlayout-lib:1.0.3'
 }

@@ -1,6 +1,5 @@
 package com.atguigu.p2p.fragment.investfragment.fragment;
 
-import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,8 +7,6 @@ import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.utils.UIUtils;
 import com.atguigu.p2p.utils.randomLayout.StellarMap;
-
-import java.util.Random;
 
 import butterknife.InjectView;
 
@@ -118,12 +115,12 @@ public class InvestRecFragment extends BaseFragment {
             TextView textView = new TextView(getActivity());
             textView.setText(datas[group * 7 + position]);
             //产生随机颜色
-            Random random = new Random();
-            int red = random.nextInt(100) + 50;
-            int green = random.nextInt(100) + 50;
-            int blue = random.nextInt(100) + 50;
+//            Random random = new Random();
+//            int red = random.nextInt(100) + 50;
+//            int green = random.nextInt(100) + 50;
+//            int blue = random.nextInt(100) + 50;
 
-            textView.setTextColor(Color.rgb(red, green, blue));
+            textView.setTextColor(UIUtils.getRandomColor());
             return textView;
         }
 

@@ -1,9 +1,12 @@
 package com.atguigu.p2p.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 
 import com.atguigu.p2p.common.MyApplication;
+
+import java.util.Random;
 
 /**
  * Created by Administrator on 2017/6/20.
@@ -68,5 +71,20 @@ public class UIUtils {
 
         }
 
+    }
+
+    /**
+     * 产生随机色
+     * @return
+     */
+    public static int getRandomColor(){
+
+        Random random = new Random();
+        int red = random.nextInt(100) + 20;
+        int green = random.nextInt(100) + 20;
+        int blue = random.nextInt(100) + 20;
+
+        int rgb = Color.rgb(red, green, blue);
+        return rgb;
     }
 }
