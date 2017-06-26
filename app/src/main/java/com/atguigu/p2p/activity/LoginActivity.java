@@ -1,27 +1,29 @@
 package com.atguigu.p2p.activity;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
 import com.atguigu.p2p.R;
-import com.atguigu.p2p.common.AppManager;
+import com.atguigu.p2p.base.BaseActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    protected void initListener() {
 
-        //添加到Activity的管理栈
-        AppManager.getInstance().addActivity(this);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.activity_login;
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //推出的时候关闭移除
-        AppManager.getInstance().removeActivity(this);
-    }
 }

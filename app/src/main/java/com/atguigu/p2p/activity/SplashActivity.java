@@ -3,50 +3,36 @@ package com.atguigu.p2p.activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.atguigu.p2p.R;
-import com.atguigu.p2p.common.AppManager;
+import com.atguigu.p2p.base.BaseActivity;
 import com.atguigu.p2p.utils.UIUtils;
 
-public class SplashActivity extends AppCompatActivity {
+import butterknife.InjectView;
 
-    private TextView splash_tv_version;
+import static com.atguigu.p2p.R.id.splash_tv_version;
 
-    private RelativeLayout activity_splash;
+public class SplashActivity extends BaseActivity {
+
+
+    @InjectView(splash_tv_version)
+    TextView splashTvVersion;
+    @InjectView(R.id.activity_splash)
+    RelativeLayout activity_splash;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+    protected void initListener() {
 
-        //添加到Activity的管理栈
-        AppManager.getInstance().addActivity(this);
-
-        activity_splash = (RelativeLayout) findViewById(R.id.activity_splash);
-        splash_tv_version = (TextView) findViewById(R.id.splash_tv_version);
-
-        initView();
-
-        initData();
-
-        initListener();
     }
 
-    private void initView() {
 
-        //设置版本号
-        splash_tv_version.setText(
-                UIUtils.getVersionFromat(
-                        R.string.verson_name, getVersion()
-                                        )
-                                );
-
+    @Override
+    public int getLayout() {
+        return R.layout.activity_splash;
     }
 
     private String getVersion() {
@@ -65,7 +51,8 @@ public class SplashActivity extends AppCompatActivity {
         return "";
     }
 
-    private void initData() {
+    @Override
+    protected void initData() {
         /**
          *  动画效果的设置
          */
@@ -106,11 +93,16 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
-
-    private void initListener() {
-
-
+    @Override
+    protected void initView() {
+        //设置版本号
+        splashTvVersion.setText(
+                UIUtils.getVersionFromat(
+                        R.string.verson_name, getVersion()
+                )
+        );
     }
+
 
     /**
      * 判断是否为第一次登录
@@ -122,11 +114,4 @@ public class SplashActivity extends AppCompatActivity {
         return true;
     }
 
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //推出的时候关闭移除
-        AppManager.getInstance().removeActivity(this);
-    }
 }

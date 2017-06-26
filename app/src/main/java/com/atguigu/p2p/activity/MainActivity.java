@@ -1,15 +1,13 @@
 package com.atguigu.p2p.activity;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.atguigu.p2p.R;
-import com.atguigu.p2p.common.AppManager;
+import com.atguigu.p2p.base.BaseActivity;
 import com.atguigu.p2p.fragment.HomeFragment;
 import com.atguigu.p2p.fragment.InvestFragment;
 import com.atguigu.p2p.fragment.MoreFragment;
@@ -20,10 +18,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @InjectView(R.id.main_rg)
     RadioGroup mainRg;
@@ -33,21 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment tempFragment;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
-
-        //添加到Activity的管理栈
-        AppManager.getInstance().addActivity(this);
-
-        initFragment();
-
-        initListener();
-    }
-
-    private void initListener() {
+    protected void initListener() {
         mainRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkId) {
@@ -70,7 +55,22 @@ public class MainActivity extends AppCompatActivity {
                 switchFragment(currentFragment);
             }
         });
+    }
 
+
+    @Override
+    protected void initData() {
+        initFragment();
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.activity_main;
     }
 
     /**
@@ -147,11 +147,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //推出的时候关闭移除
-        AppManager.getInstance().removeActivity(this);
-    }
 }
