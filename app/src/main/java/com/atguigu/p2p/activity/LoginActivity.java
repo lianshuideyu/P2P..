@@ -76,6 +76,7 @@ public class LoginActivity extends BaseActivity {
         baseBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 finish();
             }
         });
@@ -84,6 +85,12 @@ public class LoginActivity extends BaseActivity {
         regitsterTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                etLoginNumber.setText("");
+                etLoginPwd.setText("");
+                //调转到注册页面
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+
 
             }
         });

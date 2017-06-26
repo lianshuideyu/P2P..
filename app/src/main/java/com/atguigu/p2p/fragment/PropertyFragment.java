@@ -1,14 +1,17 @@
 package com.atguigu.p2p.fragment;
 
 import android.graphics.Bitmap;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.common.AppNetConfig;
 import com.atguigu.p2p.utils.BitmapUtils;
+import com.atguigu.p2p.utils.SpUtils;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -62,7 +65,24 @@ public class PropertyFragment extends BaseFragment {
     }
 
     @Override
+    public void initListener() {
+        super.initListener();
+
+        //暂时测试用，点击设置按键，退出登录
+        tvSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SpUtils.saveString(getActivity(),"admin","");
+                Toast.makeText(getContext(), "退出登录", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    @Override
     protected void initData() {
+        //从保存的用户数据中得到数据并设置到布局上
+
 
         //将头像设置为圆形
         Picasso.with(getActivity())
