@@ -6,8 +6,11 @@ import android.widget.TextView;
 
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseFragment;
+import com.atguigu.p2p.common.AppNetConfig;
+import com.squareup.picasso.Picasso;
 
 import butterknife.InjectView;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by Administrator on 2017/6/20.
@@ -58,6 +61,12 @@ public class PropertyFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+
+        //将头像设置为圆形
+        Picasso.with(getActivity())
+                .load(AppNetConfig.BASE_URL+"images/tx.png")
+                .transform(new CropCircleTransformation())//加载圆形图片，transform可以设置多个
+                .into(ivMeIcon);
 
     }
 
