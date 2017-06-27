@@ -45,7 +45,8 @@
         <!-- alipay sdk end -->
         <activity android:name=".activity.WithDrawActivity" />
         <activity android:name=".activity.property.InvestActivity" />
-        <activity android:name=".activity.property.InvestZhuZActivity"></activity>
+        <activity android:name=".activity.property.InvestZhuZActivity" />
+        <activity android:name=".activity.property.InvestBingActivity"></activity>
     </application>
 
 </manifest>

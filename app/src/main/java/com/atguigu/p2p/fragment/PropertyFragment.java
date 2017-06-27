@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.p2p.R;
@@ -15,6 +14,7 @@ import com.atguigu.p2p.activity.IconSettingActivity;
 import com.atguigu.p2p.activity.PayActivity;
 import com.atguigu.p2p.activity.WithDrawActivity;
 import com.atguigu.p2p.activity.property.InvestActivity;
+import com.atguigu.p2p.activity.property.InvestBingActivity;
 import com.atguigu.p2p.activity.property.InvestZhuZActivity;
 import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.bean.LoginBean;
@@ -162,7 +162,8 @@ public class PropertyFragment extends BaseFragment {
                 startActivity(intent2);
                 break;
             case R.id.ll_zichan:
-                Toast.makeText(getActivity(), "资产", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "资产", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), InvestBingActivity.class));
                 break;
         }
     }
