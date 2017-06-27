@@ -1,6 +1,10 @@
 package com.atguigu.p2p.activity.property;
 
 import android.graphics.Color;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseActivity;
@@ -14,16 +18,32 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
+import butterknife.InjectView;
+
 
 public class InvestActivity extends BaseActivity {
+    @InjectView(R.id.base_title)
+    TextView baseTitle;
+    @InjectView(R.id.base_back)
+    ImageView baseBack;
+    @InjectView(R.id.base_setting)
+    ImageView baseSetting;
+    @InjectView(R.id.activity_invest)
+    LinearLayout activityInvest;
 
 
 //    private LineChartItem lineChartItem ;
 
     private LineChart chart;
+
     @Override
     protected void initListener() {
-
+        baseBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -56,9 +76,17 @@ public class InvestActivity extends BaseActivity {
     }
 
     @Override
+    public void initTitle() {
+        super.initTitle();
+        baseTitle.setText("投资管理");
+    }
+
+    @Override
     protected void initView() {
 //        lineChartItem = new LineChartItem(generateDataLine(1), this);
-        chart = (LineChart)findViewById(R.id.chart);
+        chart = (LineChart) findViewById(R.id.chart);
+
+        baseBack.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -125,4 +153,5 @@ public class InvestActivity extends BaseActivity {
 
         return m;
     }
+
 }
