@@ -44,7 +44,8 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <!-- alipay sdk end -->
         <activity android:name=".activity.WithDrawActivity" />
-        <activity android:name=".activity.property.InvestActivity"></activity>
+        <activity android:name=".activity.property.InvestActivity" />
+        <activity android:name=".activity.property.InvestZhuZActivity"></activity>
     </application>
 
 </manifest>
