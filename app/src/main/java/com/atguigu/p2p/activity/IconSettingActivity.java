@@ -1,5 +1,6 @@
 package com.atguigu.p2p.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseActivity;
+import com.atguigu.p2p.common.AppManager;
 import com.atguigu.p2p.common.AppNetConfig;
 import com.atguigu.p2p.utils.BitmapUtils;
 import com.atguigu.p2p.utils.SpUtils;
@@ -75,8 +77,18 @@ public class IconSettingActivity extends BaseActivity {
             case R.id.btn_user_logout:
                 //退出登录
                 showToast("退出登录");
-                SpUtils.saveString(IconSettingActivity.this,"admin","");//将保存的用户数据设空,下次将重新登录
-                finish();
+                /**
+                 * 1.清除缓存（sp，file..）
+                 * 2.跳转到登录页面
+                 * 3.关闭所有Activity
+                 */
+
+                SpUtils.clearSave(IconSettingActivity.this,"admin");//将保存的用户数据设空,下次将重新登录
+
+                AppManager.getInstance().removeAllActivity();
+
+                startActivity(new Intent(this, LoginActivity.class));
+
                 break;
         }
     }

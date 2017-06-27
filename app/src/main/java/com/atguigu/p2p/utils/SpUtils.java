@@ -26,5 +26,11 @@ public class SpUtils {
         return value;
     }
 
+    public static void clearSave(Context context,String key){
+        SharedPreferences sp = context.getSharedPreferences("atguigu", Context.MODE_PRIVATE);
+
+        sp.edit().clear().commit();
+
+    }
 
 }

@@ -49,13 +49,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //推出的时候关闭移除
-        AppManager.getInstance().removeActivity(this);
-    }
-
     /**
      * 弹吐司的方法
      */
@@ -63,4 +56,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         Toast.makeText(BaseActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //推出的时候关闭移除
+        AppManager.getInstance().removeActivity(this);
+    }
 }

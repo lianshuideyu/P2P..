@@ -108,7 +108,7 @@ public class PropertyFragment extends BaseFragment {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-        }else {
+        }/*else {
 
             //将头像设置为圆形
             Picasso.with(getActivity())
@@ -117,7 +117,7 @@ public class PropertyFragment extends BaseFragment {
                     .into(ivMeIcon);
             tvMeName.setText("用户名");
 
-        }
+        }*/
 
 
     }
@@ -140,10 +140,10 @@ public class PropertyFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        initData();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        initData();
+//    }
 }
