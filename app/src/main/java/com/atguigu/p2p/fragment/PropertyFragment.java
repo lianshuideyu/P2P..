@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.activity.IconSettingActivity;
 import com.atguigu.p2p.activity.PayActivity;
 import com.atguigu.p2p.activity.WithDrawActivity;
+import com.atguigu.p2p.activity.property.InvestActivity;
 import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.bean.LoginBean;
 import com.atguigu.p2p.common.AppNetConfig;
@@ -25,6 +27,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017/6/20.
@@ -140,6 +143,25 @@ public class PropertyFragment extends BaseFragment {
             }
         });
 
+    }
+
+
+
+    @OnClick({R.id.ll_touzi, R.id.ll_touzi_zhiguan, R.id.ll_zichan})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_touzi:
+//                Toast.makeText(getActivity(), "投资", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), InvestActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll_touzi_zhiguan:
+                Toast.makeText(getActivity(), "投资直观", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.ll_zichan:
+                Toast.makeText(getActivity(), "资产", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     /**
