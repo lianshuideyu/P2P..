@@ -19,6 +19,7 @@ import com.atguigu.p2p.utils.SpUtils;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 
 import butterknife.InjectView;
@@ -89,10 +90,10 @@ public class PropertyFragment extends BaseFragment {
     protected void initData() {
         //从保存的用户数据中得到数据并设置到布局上
         String json = SpUtils.getSave(getContext(), "admin");
-        if(!TextUtils.isEmpty(json)) {
+        if (!TextUtils.isEmpty(json)) {
             LoginBean loginBean = JSON.parseObject(json, LoginBean.class);
             //因为之前头像的服务器地址失效了在这里重新设置
-            loginBean.getData().setImageurl(AppNetConfig.BASE_URL+"images/tx.png");
+            loginBean.getData().setImageurl(AppNetConfig.BASE_URL + "images/tx.png");
 
             //将头像设置为圆形
             Picasso.with(getActivity())
@@ -123,10 +124,9 @@ public class PropertyFragment extends BaseFragment {
     }
 
     /**
-     *
-     自定义CropCircleTransformation
+     * 自定义CropCircleTransformation
      */
-    class MyCropCircleTransformation implements Transformation{
+    class MyCropCircleTransformation implements Transformation {
 
         @Override
         public Bitmap transform(Bitmap source) {
@@ -140,10 +140,26 @@ public class PropertyFragment extends BaseFragment {
         }
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//
-//        initData();
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //重新设置头像
+        String imageUrl = SpUtils.getImageUrl(getActivity());
+        if (!TextUtils.isEmpty(imageUrl)) {
+            //将头像设置为圆形
+            Picasso.with(getActivity())
+                    .load(new File(imageUrl))
+                    .transform(new MyCropCircleTransformation())//加载圆形图片，transform可以设置多个
+                    .into(ivMeIcon);
+        }
+        //为了设置用户名
+        String json = SpUtils.getSave(getContext(), "admin");
+        if (!TextUtils.isEmpty(json)) {
+            LoginBean loginBean = JSON.parseObject(json, LoginBean.class);
+
+            String name = loginBean.getData().getName();
+            tvMeName.setText(name);
+        }
+    }
 }

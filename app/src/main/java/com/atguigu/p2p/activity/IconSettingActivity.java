@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseActivity;
 import com.atguigu.p2p.common.AppManager;
-import com.atguigu.p2p.common.AppNetConfig;
 import com.atguigu.p2p.utils.BitmapUtils;
 import com.atguigu.p2p.utils.SpUtils;
 import com.squareup.picasso.Picasso;
@@ -68,11 +68,20 @@ public class IconSettingActivity extends BaseActivity {
         //正常情况应该从缓存中获取用户数据然后加载保存的头像链接，这里简单写
         //设置头像
         //将头像设置为圆形
-        Picasso.with(this)
-                .load(AppNetConfig.BASE_URL + "images/tx.png")
-                //.transform(new CropCircleTransformation())//加载圆形图片，transform可以设置多个
-                .transform(new MyCropCircleTransformation())
-                .into(ivUserIcon);
+
+        String imageUrl = SpUtils.getImageUrl(this);
+        if (!TextUtils.isEmpty(imageUrl)) {
+            //将头像设置为圆形
+            Picasso.with(this)
+                    .load(new File(imageUrl))
+                    .transform(new MyCropCircleTransformation())//加载圆形图片，transform可以设置多个
+                    .into(ivUserIcon);
+        }else {//设置默认
+            Picasso.with(this)
+                    .load(R.drawable.my_user_default)
+                    .transform(new MyCropCircleTransformation())//加载圆形图片，transform可以设置多个
+                    .into(ivUserIcon);
+        }
     }
 
 
@@ -112,7 +121,7 @@ public class IconSettingActivity extends BaseActivity {
      */
     private void showTheDialog() {
 
-        String[] items = new String[]{"相机","本地相册"};
+        String[] items = new String[]{"相机", "本地相册"};
         new AlertDialog.Builder(this)
                 .setItems(items, new DialogInterface.OnClickListener() {
                     @Override
@@ -120,12 +129,12 @@ public class IconSettingActivity extends BaseActivity {
 
                         showToast(position + "");
                         switch (position) {
-                            case 0 :
+                            case 0:
                                 //打开相机
                                 showCamera();
 
                                 break;
-                            case 1 :
+                            case 1:
                                 //打开本地相册
 
                                 showLocalPhoto();
@@ -141,20 +150,24 @@ public class IconSettingActivity extends BaseActivity {
         GalleryFinal.openGallerySingle(REQUEST_CODE_GALLERY, new GalleryFinal.OnHanlderResultCallback() {
             @Override
             public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-                Log.e("LocalPhoto","相册开启");
-                showToast(resultList.get(0).getPhotoPath() + "");
-                if(resultList != null && resultList.size() > 0) {
-                    setIcon(resultList);
+                Log.e("LocalPhoto", "相册开启");
+//                showToast(resultList.get(0).getPhotoPath() + "");
+
+                if (resultList != null && resultList.size() > 0) {
+
+                    PhotoInfo photoInfo = resultList.get(0);
+                    setIcon(photoInfo.getPhotoPath());
+                    //然后上传图片到服务器
+
+                    //保存到sp
+                    SpUtils.saveImageUrl(IconSettingActivity.this,photoInfo.getPhotoPath());
                 }
 
-                //然后上传图片到服务器
-
-                //保存到sp
             }
 
             @Override
             public void onHanlderFailure(int requestCode, String errorMsg) {
-                Log.e("LocalPhoto","相册开启失败==" + errorMsg);
+                Log.e("LocalPhoto", "相册开启失败==" + errorMsg);
             }
         });
 
@@ -171,35 +184,36 @@ public class IconSettingActivity extends BaseActivity {
         GalleryFinal.openCamera(REQUEST_CODE_CAMERA, new GalleryFinal.OnHanlderResultCallback() {
             @Override
             public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-                Log.e("camera","相机开启");
+                Log.e("camera", "相机开启");
                 //设置头像
-                if(resultList != null && resultList.size() > 0) {
-                    setIcon(resultList);
+                if (resultList != null && resultList.size() > 0) {
+                    PhotoInfo photoInfo = resultList.get(0);
+                    setIcon(photoInfo.getPhotoPath());
+
+                    //Log.e("camera","相机==" + photoInfo.getPhotoPath());
+
+                    //然后上传图片到服务器
+
+                    //保存到sp
+                    SpUtils.saveImageUrl(IconSettingActivity.this,photoInfo.getPhotoPath());
                 }
 
-                //Log.e("camera","相机==" + photoInfo.getPhotoPath());
-
-                //然后上传图片到服务器
-
-                //保存到sp
             }
 
             @Override
             public void onHanlderFailure(int requestCode, String errorMsg) {
-                Log.e("camera","相机开启失败==" + errorMsg);
+                Log.e("camera", "相机开启失败==" + errorMsg);
             }
         });
     }
 
     @NonNull
-    private PhotoInfo setIcon(List<PhotoInfo> resultList) {
-        PhotoInfo photoInfo = resultList.get(0);
+    private void setIcon(String imageUrl) {
         //将拍照图片设置到头像
         Picasso.with(IconSettingActivity.this)
-                .load(new File(photoInfo.getPhotoPath()))//这里加载保存到本地的拍照图片
+                .load(new File(imageUrl))//这里加载保存到本地的拍照图片
                 .transform(new MyCropCircleTransformation())
                 .into(ivUserIcon);
-        return photoInfo;
     }
 
     /**
