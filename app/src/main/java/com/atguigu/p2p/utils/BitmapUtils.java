@@ -41,7 +41,8 @@ public class BitmapUtils {
             Matrix matrix = new Matrix();
 //            matrix.setTranslate(-width, -height);
             //在这调整头像被截取的位置，向右向下偏移
-            matrix.setTranslate(width + UIUtils.dp2px(10), height + UIUtils.dp2px(10));
+//            matrix.setTranslate(width + UIUtils.dp2px(10), height + UIUtils.dp2px(10));
+            matrix.setTranslate(-width, -height);
             shader.setLocalMatrix(matrix);//利用矩阵进行定位
         }
         paint.setShader(shader);
