@@ -12,6 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.activity.IconSettingActivity;
 import com.atguigu.p2p.activity.PayActivity;
+import com.atguigu.p2p.activity.WithDrawActivity;
 import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.bean.LoginBean;
 import com.atguigu.p2p.common.AppNetConfig;
@@ -72,6 +73,7 @@ public class PropertyFragment extends BaseFragment {
 
     }
 
+
     @Override
     public void initListener() {
         super.initListener();
@@ -129,7 +131,14 @@ public class PropertyFragment extends BaseFragment {
             tvMeName.setText("用户名");
 
         }*/
-
+        //点击体现余额--支付宝，这里一般点击后提交给服务器处理，然后返回处理结果即可
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {//跳转到提现页面
+                Intent intent = new Intent(getActivity(), WithDrawActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
