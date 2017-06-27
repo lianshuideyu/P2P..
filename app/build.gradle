@@ -34,4 +34,7 @@ dependencies {
     compile 'com.zhy:flowlayout-lib:1.0.3'
     //compile 'jp.wasabeef:picasso-transformations:2.1.2'
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
+    compile files('libs/alipaysdk.jar')
+    compile files('libs/alipaysecsdk.jar')
+    compile files('libs/alipayutdid.jar')
 }

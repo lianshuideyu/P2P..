@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.atguigu.p2p.R;
 import com.atguigu.p2p.activity.IconSettingActivity;
+import com.atguigu.p2p.activity.PayActivity;
 import com.atguigu.p2p.base.BaseFragment;
 import com.atguigu.p2p.bean.LoginBean;
 import com.atguigu.p2p.common.AppNetConfig;
@@ -84,6 +85,15 @@ public class PropertyFragment extends BaseFragment {
             }
         });
 
+        //点击进入充值页面
+        recharge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //跳转到支付页面
+                Intent intent = new Intent(getActivity(), PayActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
