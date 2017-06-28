@@ -1,1 +1,1 @@
-include ':app', ':encryption', ':MPChartLib'
+include ':app', ':encryption', ':MPChartLib', ':GestureLockLib'
