@@ -12,6 +12,7 @@ import com.atguigu.p2p.R;
 import com.atguigu.p2p.base.BaseActivity;
 import com.atguigu.p2p.common.AppNetConfig;
 import com.atguigu.p2p.utils.HttpUtils;
+import com.atguigu.p2p.utils.Md5;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -104,7 +105,7 @@ public class RegisterActivity extends BaseActivity {
 
         map.put("name",name);
         map.put("phone",numner);
-        map.put("password",pwd);
+        map.put("password", Md5.Md5_16(pwd));//利用Md5加密密码
 
         HttpUtils.getInstance().post(AppNetConfig.REGISTER, map, new HttpUtils.MyHttpClickListener() {
             @Override

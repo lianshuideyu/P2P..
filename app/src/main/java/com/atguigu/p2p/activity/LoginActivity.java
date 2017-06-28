@@ -16,6 +16,7 @@ import com.atguigu.p2p.base.BaseActivity;
 import com.atguigu.p2p.bean.LoginBean;
 import com.atguigu.p2p.common.AppNetConfig;
 import com.atguigu.p2p.utils.HttpUtils;
+import com.atguigu.p2p.utils.Md5;
 import com.atguigu.p2p.utils.SpUtils;
 
 import org.json.JSONException;
@@ -106,7 +107,7 @@ public class LoginActivity extends BaseActivity {
         Map<String, String> map = new HashMap<>();
 
         map.put("phone",number);
-        map.put("password",psd);
+        map.put("password", Md5.Md5_16(psd));//登录密码加密
         //15321970103
         HttpUtils.getInstance().post(AppNetConfig.LOGIN, map, new HttpUtils.MyHttpClickListener() {
             @Override
