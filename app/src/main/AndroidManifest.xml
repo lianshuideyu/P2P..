@@ -46,7 +46,9 @@
         <activity android:name=".activity.WithDrawActivity" />
         <activity android:name=".activity.property.InvestActivity" />
         <activity android:name=".activity.property.InvestZhuZActivity" />
-        <activity android:name=".activity.property.InvestBingActivity"></activity>
+        <activity android:name=".activity.property.InvestBingActivity"/>
+        <activity android:name=".activity.moregusturelock.GestureVerifyActivity"/>
+        <activity android:name=".activity.moregusturelock.GestureEditActivity"/>
     </application>
 
 </manifest>

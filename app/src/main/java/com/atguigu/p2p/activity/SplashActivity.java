@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.atguigu.p2p.R;
+import com.atguigu.p2p.activity.moregusturelock.GestureVerifyActivity;
 import com.atguigu.p2p.base.BaseActivity;
 import com.atguigu.p2p.bean.LoginBean;
 import com.atguigu.p2p.bean.UpdateBean;
@@ -321,6 +322,7 @@ getFilesDir()方法用于获取/data/data/<application package>/files目录
      * 进入主界面或登录页面
      */
     private void enterActivity() {
+
         if (isLogin()) {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
@@ -339,6 +341,13 @@ getFilesDir()方法用于获取/data/data/<application package>/files目录
                         R.string.verson_name, getVersion()
                 )
         );
+
+        //判断是否开始手势识别
+        boolean toggleIscheck = SpUtils.getToggleIscheck(this);
+        if(toggleIscheck) {
+            Intent intent = new Intent(this, GestureVerifyActivity.class);
+            startActivity(intent);
+        }
     }
 
 

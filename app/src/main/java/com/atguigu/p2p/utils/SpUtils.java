@@ -75,4 +75,30 @@ public class SpUtils {
 
     }
 
+    /**
+     * 保存手势识别是否选中
+     * @param context
+     * @param value
+     */
+    public static void saveToggleIscheck(Context context,boolean value){
+        SharedPreferences sp = context.getSharedPreferences("atguigu", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putBoolean("ischeck",value);
+        edit.commit();
+    }
+
+    /**
+     * 得到手势识别是否选中
+     * @param context
+     * @return
+     */
+    public static boolean getToggleIscheck(Context context){
+        SharedPreferences sp = context.getSharedPreferences("atguigu", Context.MODE_PRIVATE);
+
+        boolean value = sp.getBoolean("ischeck", false);
+
+        return value;
+    }
+
 }
